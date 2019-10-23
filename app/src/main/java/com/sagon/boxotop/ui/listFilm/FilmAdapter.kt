@@ -45,7 +45,7 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
 
         fun onBind(item : Film) {
             filmTitle.text = item.title
-            picasso.load(item.poster).into(filmImage)
+            picasso.load(item.poster).error(R.drawable.no_image_found).into(filmImage)
         }
     }
 }
