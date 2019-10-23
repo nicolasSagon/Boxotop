@@ -11,7 +11,7 @@ import com.sagon.boxotop.extensions.setVisible
 import com.sagon.boxotop.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class ListFilmActivity : BaseActivity() {
+class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedListener {
 
     private lateinit var listFilmViewModel: ListFilmViewModel
     private lateinit var adapter: FilmAdapter
@@ -32,23 +32,17 @@ class ListFilmActivity : BaseActivity() {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = RecyclerView.VERTICAL
         adapter = FilmAdapter()
+        adapter.addOnEndOfRecyclerViewReachedListener(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
-
-        val scrollListener = object : EndlessRecyclerViewScrollListener(layoutManager){
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                loadNextData()
-            }
-        }
-        recyclerView.addOnScrollListener(scrollListener)
     }
 
-    fun loadNextData(){
+    override fun onLastElementReached() {
         displayLoader(true)
         listFilmViewModel.getNextFilm().observe(this, filmObserver)
     }
 
-    fun displayLoader(isDisplay : Boolean){
+    private fun displayLoader(isDisplay : Boolean){
         if(isDisplay){
             progressBar.setVisible(true)
             testDisplay.setVisible(false)
@@ -64,15 +58,19 @@ class ListFilmActivity : BaseActivity() {
 
     private fun displayFilms(paginedFilms : PaginedData<List<Film>>){
         displayLoader(false)
-        if(!paginedFilms.data.isEmpty()){
-            testDisplay.setVisible(false)
-            recyclerView.setVisible(true)
-            adapter.updateData(paginedFilms.data, paginedFilms.currentPage == 1)
-        }
-        else {
+        if(paginedFilms.data.isEmpty() && paginedFilms.currentPage == 1){
             recyclerView.setVisible(false)
             testDisplay.setVisible(true)
             testDisplay.text = "Pas de données"
+        }
+        else {
+            testDisplay.setVisible(false)
+            recyclerView.setVisible(true)
+
+            //Prevent infinite loading when no more result
+            if(!paginedFilms.data.isEmpty()){
+                adapter.updateData(paginedFilms.data, paginedFilms.currentPage == 1)
+            }
         }
     }
 }
