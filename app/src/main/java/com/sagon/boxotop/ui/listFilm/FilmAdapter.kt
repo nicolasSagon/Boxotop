@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sagon.boxotop.R
 import com.sagon.boxotop.domain.model.Film
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class FilmAdapter : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
 
@@ -49,10 +51,12 @@ class FilmAdapter : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
     inner class FilmViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val filmTitle : TextView = view.findViewById(R.id.filmTitle)
+        private val filmYear : TextView = view.findViewById(R.id.filmYear)
         private val filmImage : ImageView = view.findViewById(R.id.filmImageView)
 
         fun onBind(item : Film) {
             filmTitle.text = item.title
+            filmYear.text = item.Year
             picasso.load(item.poster).error(R.drawable.no_image_found).into(filmImage)
         }
     }

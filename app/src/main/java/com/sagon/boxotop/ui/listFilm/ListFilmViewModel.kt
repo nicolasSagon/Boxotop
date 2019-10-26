@@ -19,14 +19,14 @@ class ListFilmViewModel(application: Application) : AndroidViewModel(application
         if(isFirstLoad) {
             currentPage = 1
         }
-        val liveData = getListFilm.getLiveData(GetListFilm.Param(searchKey, currentPage))
+        val liveData = getListFilm.buildLiveData(GetListFilm.Param(searchKey, currentPage))
         currentPage++
         return liveData
     }
 
     fun getNextFilm() : LiveData<PaginedData<List<Film>>>{
         return if(lastSearchKey != null){
-            val liveData = getListFilm.getLiveData((GetListFilm.Param(lastSearchKey!!, currentPage)))
+            val liveData = getListFilm.buildLiveData((GetListFilm.Param(lastSearchKey!!, currentPage)))
             currentPage++
             liveData
         } else {
