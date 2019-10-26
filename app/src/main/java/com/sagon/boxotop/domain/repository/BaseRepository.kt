@@ -11,6 +11,6 @@ interface BaseRepository<T> {
     //pourrait être amélioré avec une classe pour faire passer les paramètres facilement utilisable
     fun getListWithParameter(parameter : String, page: Int) : Flowable<List<Film>>
 
-    fun getSingleItem() : Single<T>
+    fun getSingleItem(id: String): Single<T>
 
 }

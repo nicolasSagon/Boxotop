@@ -9,16 +9,18 @@ import com.sagon.boxotop.domain.model.Film
 import com.sagon.boxotop.domain.usecase.PaginedData
 import com.sagon.boxotop.extensions.setVisible
 import com.sagon.boxotop.ui.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.sagon.boxotop.ui.listFilm.detailsFilm.DetailsFilmActivity
+import kotlinx.android.synthetic.main.activity_list_film.*
 
-class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedListener {
+class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedListener,
+    FilmAdapter.OnItemSelectedListener {
 
     private lateinit var listFilmViewModel: ListFilmViewModel
     private lateinit var adapter: FilmAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_list_film)
 
         listFilmViewModel = getViewModel(this)
 
@@ -33,6 +35,7 @@ class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedL
         layoutManager.orientation = RecyclerView.VERTICAL
         adapter = FilmAdapter()
         adapter.addOnEndOfRecyclerViewReachedListener(this)
+        adapter.addOnItemSelectedListener(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
     }
@@ -40,6 +43,13 @@ class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedL
     override fun onLastElementReached() {
         displayLoader(true)
         listFilmViewModel.getNextFilm().observe(this, filmObserver)
+    }
+
+    override fun onItemSelected(film: Film?) {
+        if (film != null) {
+            val intent = DetailsFilmActivity.createIntent(this, film.imdbID)
+            startActivity(intent)
+        }
     }
 
     private fun displayLoader(isDisplay : Boolean){

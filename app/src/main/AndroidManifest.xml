@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.listFilm.detailsFilm.DetailsFilmActivity"
+                  android:parentActivityName=".ui.listFilm.ListFilmActivity"/>
     </application>
 
 </manifest>
