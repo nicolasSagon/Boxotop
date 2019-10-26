@@ -44,7 +44,7 @@ class DetailsFilmActivity : BaseActivity() {
 
     private fun displayFilm(film: Film) {
         filmTitle.text = film.title
-        picasso.load(film.poster).into(filmImageView)
+        picasso.load(film.poster).error(R.drawable.no_image_found).into(filmImageView)
         releaseDate.text = getString(R.string.film_release_date, film.released)
         filmDuration.text = getString(R.string.film_duration, film.runtime)
         filmGenre.text = getString(R.string.film_genre, film.genre)
