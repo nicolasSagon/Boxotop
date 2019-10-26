@@ -1,6 +1,8 @@
 package com.sagon.boxotop.ui.listFilm
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import com.sagon.boxotop.extensions.setVisible
 import com.sagon.boxotop.ui.BaseActivity
 import com.sagon.boxotop.ui.listFilm.detailsFilm.DetailsFilmActivity
 import kotlinx.android.synthetic.main.activity_list_film.*
+
 
 class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedListener,
     FilmAdapter.OnItemSelectedListener {
@@ -27,6 +30,8 @@ class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedL
         submitButton.setOnClickListener {
             if(!searchTitle.text.isNullOrEmpty()) {
                 displayLoader(true)
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(mainLayout.windowToken, 0)
                 listFilmViewModel.getListFilmBySearchKey(searchTitle.text.toString(), true).observe(this, filmObserver)
             }
         }
