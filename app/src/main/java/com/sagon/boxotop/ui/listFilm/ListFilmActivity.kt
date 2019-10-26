@@ -61,7 +61,7 @@ class ListFilmActivity : BaseActivity(), FilmAdapter.OnEndOfRecyclerViewReachedL
         if(paginedFilms.data.isEmpty() && paginedFilms.currentPage == 1){
             recyclerView.setVisible(false)
             testDisplay.setVisible(true)
-            testDisplay.text = "Pas de données"
+            testDisplay.text = getString(R.string.no_data_found)
         }
         else {
             testDisplay.setVisible(false)

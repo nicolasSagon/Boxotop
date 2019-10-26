@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 tools:text="TOP GUN"
                 android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/mainTextColor"
                 android:paddingTop="@dimen/space_small"
                 android:paddingStart="@dimen/space_small"
                 app:layout_constraintStart_toEndOf="@+id/filmImageView"
