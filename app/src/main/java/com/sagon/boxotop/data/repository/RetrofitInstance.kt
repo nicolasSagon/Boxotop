@@ -13,8 +13,7 @@ object RetrofitInstance {
 
     val omdbWebService : OmdbWebService
 
-    //TODO Remove that from this file and find a way to add it automatically
-    val apiKey = "fb06540e"
+    val apiKey = BuildConfig.OMDB_API_KEY
 
     init {
 

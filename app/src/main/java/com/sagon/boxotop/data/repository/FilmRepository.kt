@@ -24,7 +24,7 @@ class FilmRepository : BaseRepository<Film> {
     }
 
     override fun getSingleItem(id: String): Single<Film> {
-        return omdbWebService.getFilmById(id = id, apiKey = RetrofitInstance.apiKey).map {
+        return omdbWebService.getFilmById(id = id, apiKey = RetrofitInstance.apiKey, plotSize = "full").map {
             filmMapper.convert(it)
         }
     }

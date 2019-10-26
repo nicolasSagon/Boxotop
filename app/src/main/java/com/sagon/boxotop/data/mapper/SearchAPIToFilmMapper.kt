@@ -38,7 +38,7 @@ class SearchAPIToFilmMapper : BaseMapper<SearchAPI, List<Film>> {
         override val awards: String? = null
         override val ratings: List<Rating>? = null
         override val metascore: String? = null
-        override val imdbRating: String? = null
+        override val imdbRating: Float? = null
         override val imdbVotes: String? = null
         override val dvd: String? = null
         override val boxOffice: String? = null

@@ -11,7 +11,7 @@ data class FilmItemApi(
     val rated: String,
     @field:Json(name = "Released")
     val released: String,
-    @field:Json(name = "RunTime")
+    @field:Json(name = "Runtime")
     val runtime: String,
     @field:Json(name = "Genre")
     val genre: String,

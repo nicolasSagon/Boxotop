@@ -3,4 +3,10 @@
     <string name="film_title_hint">Titre du film</string>
     <string name="ok_button">OK</string>
     <string name="no_data_found">Pas de données</string>
+    <string name="film_release_date">Date de sortie : %1$s</string>
+    <string name="film_duration">Durée : %1$s</string>
+    <string name="film_genre">Genre : %1$s</string>
+    <string name="film_writer">Scénariste : %1$s</string>
+    <string name="film_actors">Acteurs : %1$s</string>
+    <string name="plot_title">Synopsis</string>
 </resources>

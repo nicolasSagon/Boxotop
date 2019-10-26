@@ -18,7 +18,7 @@ interface Film {
     val poster: String
     val ratings: List<Rating>?
     val metascore: String?
-    val imdbRating: String?
+    val imdbRating: Float?
     val imdbVotes: String?
     val imdbID: String
     val type: String

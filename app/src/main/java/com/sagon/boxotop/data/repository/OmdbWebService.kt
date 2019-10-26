@@ -13,5 +13,5 @@ interface OmdbWebService {
     fun getListFilmBySearch(@Query("s") searchKey: String, @Query("apiKey") apiKey: String, @Query("page") pageNumber: Int): Flowable<SearchAPI>
 
     @GET(".")
-    fun getFilmById(@Query("i") id: String, @Query("apiKey") apiKey: String): Single<FilmItemApi>
+    fun getFilmById(@Query("i") id: String, @Query("apiKey") apiKey: String, @Query("plot") plotSize: String): Single<FilmItemApi>
 }
